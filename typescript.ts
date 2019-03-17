@@ -93,8 +93,6 @@ class Truck extends Auto {
         this.fourByFour = fourByFour;
     }
 
-
-
 }
 
 
@@ -103,5 +101,13 @@ class Truck extends Auto {
 window.onload = function () {
     var truck = new Truck(40000, new Engine(300, 'v12'), 'Chevy', 'Silverado',
         'Long Bed', true);
-    alert(truck.calculateTotal().toString());
+    //alert(truck.engine.enginetype);
+    //alert(truck.bedlength);
+    //alert(truck.calculatetotal().tostring());
+
+    truck.addAccessories(new Accessory(1234, 'Sunroof'), new Accessory(4321, 'Towing package'));
+
+    
+
+
 }
