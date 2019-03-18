@@ -4,6 +4,23 @@ interface IEngine {
 }
 
 
+interface IAutoOptions {
+    basePrice: number,
+    engine: IEngine,
+    state: string,
+    make: string,
+    model: string,
+    year: number
+
+}
+
+
+interface ITruckOptions extends IAutoOptions {
+    bedLength: string;
+    fourByFour: boolean;
+}
+
+
 
 class Engine implements IEngine {
 
@@ -61,21 +78,14 @@ class Auto {
 
 
 
-    constructor(
-        basePrice: number,
-        engine: IEngine,
-        make: string,
-        model: string,
-        state: string,
-        year: number
-    ) {
+    constructor(options: IAutoOptions) {
 
-            this._engine = engine;
-            this._basePrice = basePrice;
-            this.make = make;
-            this.model = model;
-            this.year = year;
-            this.state = state;
+            this._engine = options.engine;
+        this._basePrice = options.basePrice;
+        this.make = options.make;
+        this.model = options.model;
+        this.year = options.year;
+        this.state = options.state;
 
     }
 
@@ -120,17 +130,17 @@ class Auto {
 
 }
 
-//class Truck extends Auto {
-//    bedLength: string;
-//    fourByFour: boolean;
+class Truck extends Auto {
+    bedLength: string;
+    fourByFour: boolean;
 
-//    constructor(basePrice: number, engine: Engine, make: string, model: string, bedLength: string, fourByFour: boolean) {
-//        super(basePrice, engine, make, model);
-//        this.bedLength = bedLength;
-//        this.fourByFour = fourByFour;
-//    }
+    constructor(options: ITruckOptions) {
+        super(options);
+        this.bedLength = options.bedLength;
+        this.fourByFour = options.fourByFour;
+    }
 
-//}
+}
 
 
 

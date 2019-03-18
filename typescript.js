@@ -40,7 +40,7 @@ var Accessory = /** @class */ (function () {
     return Accessory;
 }());
 var Auto = /** @class */ (function () {
-    function Auto(basePrice, engine, make, model, state, year) {
+    function Auto(basePrice, engine, state, make, model, year) {
         this._engine = engine;
         this._basePrice = basePrice;
         this.make = make;
