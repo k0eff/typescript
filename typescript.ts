@@ -1,4 +1,11 @@
-class Engine {
+interface IEngine {
+    start(callback: (startStatus: boolean, engineType: string) => void): void;
+    stop(callback: (stopStatus: boolean, engineType: string) => void): void;
+}
+
+
+
+class Engine implements IEngine {
 
     constructor(public horsePower: number, public engineType: string) { }
 
@@ -11,7 +18,6 @@ class Engine {
 
 
 
-
     stop(callback: (stopStatus: boolean, engineType: string) => void) {
         window.setTimeout(() => {
             callback(true, this.engineType);
@@ -19,6 +25,24 @@ class Engine {
     }
 
 }
+
+
+class CustomEngine implements IEngine {
+
+    start(callback: (startStatus: boolean, engineType: string) => void) {
+        window.setTimeout(() => {
+            callback(true, 'Custom Engine');
+        }, 1000);
+    }
+
+
+    stop(callback: (stopStatus: boolean, engineType: string) => void) {
+        window.setTimeout(() => {
+            callback(true, 'Custom Engine');
+        }, 1000);
+    }
+}
+
 
 
 class Accessory {
@@ -107,7 +131,9 @@ window.onload = function () {
 
     truck.addAccessories(new Accessory(1234, 'Sunroof'), new Accessory(4321, 'Towing package'));
 
-    
+    truck.engine.start( /*defining a new function here*/(status: boolean, engineType: string) => {
+        alert(engineType + ' was started');
+    });
 
 
 }

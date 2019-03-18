@@ -30,6 +30,21 @@ var Engine = /** @class */ (function () {
     };
     return Engine;
 }());
+var CustomEngine = /** @class */ (function () {
+    function CustomEngine() {
+    }
+    CustomEngine.prototype.start = function (callback) {
+        window.setTimeout(function () {
+            callback(true, 'Custom Engine');
+        }, 1000);
+    };
+    CustomEngine.prototype.stop = function (callback) {
+        window.setTimeout(function () {
+            callback(true, 'Custom Engine');
+        }, 1000);
+    };
+    return CustomEngine;
+}());
 var Accessory = /** @class */ (function () {
     function Accessory(accessoryNumber, title) {
         this.accessoryNumber = accessoryNumber;
@@ -104,5 +119,8 @@ window.onload = function () {
     //alert(truck.bedlength);
     //alert(truck.calculatetotal().tostring());
     truck.addAccessories(new Accessory(1234, 'Sunroof'), new Accessory(4321, 'Towing package'));
+    truck.engine.start(/*defining a new function here*/ function (status, engineType) {
+        alert(engineType + ' was started');
+    });
 };
 //# sourceMappingURL=typescript.js.map
