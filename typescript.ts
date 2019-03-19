@@ -28,6 +28,7 @@ class Engine implements IEngine {
 
 
     start(callback: (startStatus: boolean, engineType: string) => void) {
+
         window.setTimeout(() => {
             callback(true, this.engineType);
         }, 1000);
@@ -154,14 +155,29 @@ window.onload = function () {
 
     //truck.addAccessories(new Accessory(1234, 'Sunroof'), new Accessory(4321, 'Towing package'));
 
-    //truck.engine.start( /*defining a new function here*/(status: boolean, engineType: string) => {
+    //truck.engine.start( /*defining a new function here*/ (status: boolean, engineType: string) => {
     //    alert(engineType + ' was started');
     //});
 
 
-    var auto = new Auto(40000, new Engine(250, 'Type'), 'Make', 'Model', 'Good', 2012);
-    var myEngine = <Engine>auto.engine;
-    alert(myEngine.horsePower.toString);
+    //var auto = new Auto(40000, new Engine(250, 'Type'), 'Make', 'Model', 'Good', 2012);
+    //var myEngine = <Engine>auto.engine;
+    //alert(myEngine.horsePower.toString);
+
+
+
+    var truck = new Truck({
+        basePrice: 40000,
+        engine: new Engine(300, 'V8'),
+        state: 'New',
+        make: 'Ford',
+        model: 'F-150',
+        year: 2010,
+        bedLength: 'big',
+        fourByFour: true
+    });
+
+    alert(truck.fourByFour);
 
 
 }

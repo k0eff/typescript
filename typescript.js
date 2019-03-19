@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Engine = /** @class */ (function () {
     function Engine(horsePower, engineType) {
         this.horsePower = horsePower;
@@ -40,13 +53,13 @@ var Accessory = /** @class */ (function () {
     return Accessory;
 }());
 var Auto = /** @class */ (function () {
-    function Auto(basePrice, engine, state, make, model, year) {
-        this._engine = engine;
-        this._basePrice = basePrice;
-        this.make = make;
-        this.model = model;
-        this.year = year;
-        this.state = state;
+    function Auto(options) {
+        this._engine = options.engine;
+        this._basePrice = options.basePrice;
+        this.make = options.make;
+        this.model = options.model;
+        this.year = options.year;
+        this.state = options.state;
     }
     Auto.prototype.calculateTotal = function () {
         var taxRate = .08;
@@ -92,15 +105,16 @@ var Auto = /** @class */ (function () {
     });
     return Auto;
 }());
-//class Truck extends Auto {
-//    bedLength: string;
-//    fourByFour: boolean;
-//    constructor(basePrice: number, engine: Engine, make: string, model: string, bedLength: string, fourByFour: boolean) {
-//        super(basePrice, engine, make, model);
-//        this.bedLength = bedLength;
-//        this.fourByFour = fourByFour;
-//    }
-//}
+var Truck = /** @class */ (function (_super) {
+    __extends(Truck, _super);
+    function Truck(options) {
+        var _this = _super.call(this, options) || this;
+        _this.bedLength = options.bedLength;
+        _this.fourByFour = options.fourByFour;
+        return _this;
+    }
+    return Truck;
+}(Auto));
 window.onload = function () {
     //var truck = new Truck(40000, new Engine(300, 'v12'), 'Chevy', 'Silverado',
     //    'Long Bed', true);
@@ -108,11 +122,22 @@ window.onload = function () {
     //alert(truck.bedlength);
     //alert(truck.calculatetotal().tostring());
     //truck.addAccessories(new Accessory(1234, 'Sunroof'), new Accessory(4321, 'Towing package'));
-    //truck.engine.start( /*defining a new function here*/(status: boolean, engineType: string) => {
+    //truck.engine.start( /*defining a new function here*/ (status: boolean, engineType: string) => {
     //    alert(engineType + ' was started');
     //});
-    var auto = new Auto(40000, new Engine(250, 'Type'), 'Make', 'Model', 'Good', 2012);
-    var myEngine = auto.engine;
-    alert(myEngine.horsePower.toString);
+    //var auto = new Auto(40000, new Engine(250, 'Type'), 'Make', 'Model', 'Good', 2012);
+    //var myEngine = <Engine>auto.engine;
+    //alert(myEngine.horsePower.toString);
+    var truck = new Truck({
+        basePrice: 40000,
+        engine: new Engine(300, 'V8'),
+        state: 'New',
+        make: 'Ford',
+        model: 'F-150',
+        year: 2010,
+        bedLength: 'big',
+        fourByFour: true
+    });
+    alert(truck.fourByFour);
 };
 //# sourceMappingURL=typescript.js.map
